@@ -6,11 +6,12 @@ import Footer from "./components/Footer/Footer.jsx";
 
 function App() {
   const location = useLocation();
+  const allowedPages = ["/", "/about", "/faq"]
   return (
     <>
       <div>
         <Navbar />
-        { location.pathname !== "/cart" ? <Hero /> : null}
+        { allowedPages.includes(location.pathname) ? <Hero /> : null}
         <div className={styles.main}>
           <Outlet />
           <Footer />

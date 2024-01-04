@@ -7,8 +7,23 @@ export const getAllProducts = async (req, res) => {
       .status(200)
       .json({ success: true, message: "Found products", data: products });
   } catch (err) {
-    console.log(err);
     res.status(404).json({ success: false, message: "Products not found" });
+  }
+};
+
+export const getSingleProduct = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const product = await Product.findById(id).populate('reviews');
+
+    res.status(200).json({
+      success: true,
+      message: "Product found",
+      data: product,
+    });
+  } catch (err) {
+    res.status(404).json({ success: false, message: "Failed to find product" });
   }
 };
 

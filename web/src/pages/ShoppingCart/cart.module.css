@@ -33,3 +33,36 @@
     width: 100%;
     justify-content: space-between;
 }
+
+.number {
+    width: 100%;
+    max-width: 100px;
+    border: 1px solid black;
+    border-radius: 4px;
+    text-align: right;
+}
+
+.button {
+    width: fit-content;
+    padding: 0 20px 0 20px;
+    height: 38px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgba(195, 231, 230, 1);
+    box-shadow: 0px 2px 5px 5px rgba(194, 194, 194, 0.2);
+    cursor: pointer;
+  
+    color: rgba(0, 0, 0, 1);
+    font-family: "M PLUS 1";
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 0;
+    letter-spacing: 1.2px;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  
+  .button:hover {
+    background-color: #8daaa9;
+  }

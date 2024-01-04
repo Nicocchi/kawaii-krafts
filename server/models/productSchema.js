@@ -29,4 +29,13 @@ const ProductSchema = new mongoose.Schema({
   sku: { type: mongoose.Types.ObjectId, ref: "Sku" },
 }, { timestamps: true });
 
+ProductSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "sku",
+    select: "sku",
+  });
+
+  next();
+});
+
 export default mongoose.model("Product", ProductSchema);

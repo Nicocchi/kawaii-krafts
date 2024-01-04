@@ -71,11 +71,8 @@ export const deleteUser = async (req, res) => {
 
 export const getUserProfile = async (req, res) => {
   const userId = req.userId;
-  console.log(userId);
   try {
     const user = await User.findById(userId).select("-password");
-
-    console.log(user);
 
     if (!user) {
       return res

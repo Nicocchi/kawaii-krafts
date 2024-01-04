@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 
 const initialState = {
   user: localStorage.getItem('user') !== undefined ? JSON.parse(localStorage.getItem('user')) : null,
@@ -14,7 +14,6 @@ const authReducer = (state, action) => {
         role: null,
         token: null,
       };
-      break;
     case "LOGIN_SUCCESS":
       return {
         user: action.payload.user,

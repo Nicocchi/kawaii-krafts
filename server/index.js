@@ -9,6 +9,7 @@ import userRoute from "./routes/user.js";
 import adminRoute from "./routes/admin.js";
 import reviewRoute from "./routes/reviews.js";
 import productRoute from "./routes/product.js";
+import skuRoute from "./routes/skus.js";
 
 dotenv.config();
 
@@ -53,6 +54,7 @@ app.use("/api/v1/users", userRoute);
 app.use("/api/v1/admins", adminRoute);
 app.use("/api/v1/reviews", reviewRoute);
 app.use("/api/v1/products", productRoute);
+app.use("/api/v1/skus", skuRoute);
 
 app.listen(port, () => {
   connectDB();

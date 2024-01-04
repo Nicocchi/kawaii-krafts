@@ -48,7 +48,6 @@ const LoginModal = ({ visible }) => {
   const onRegisterSubmitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log(formData);
 
     try {
       const res = await fetch(`${BASE_URL}/auth/register`, {
@@ -66,7 +65,6 @@ const LoginModal = ({ visible }) => {
       }
 
       setLoading(false);
-      console.log(message);
       //toast.success(message)
       // navigate to login
     } catch (err) {

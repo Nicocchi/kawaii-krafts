@@ -1,6 +1,6 @@
 import styles from "./profile.module.css";
 import useGetProfile from "../../hooks/useFetchData";
-import { BASE_URL } from "../../config";
+const BASE_URL = import.meta.env.VITE_API_URL;
 import Modal from "../../components/core/Modal/Modal";
 import { useState } from "react";
 
@@ -14,7 +14,6 @@ const ProfilePage = () => {
 
   const toggleModal = () => {
       setModal(!modal);
-      console.log("toggle?", modal);
   }
 
   return (

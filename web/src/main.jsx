@@ -7,14 +7,13 @@ import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext.jsx";
 
-// redux
-import { Provider } from "react-redux";
-import store from "./store.js";
 import About from "./pages/About/AboutPage.jsx";
 import FAQ from "./pages/FAQ/FAQPage.jsx";
 import Cart from "./pages/ShoppingCart/ShoppingCartPage.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
 import ProfilePage from "./pages/Profile/ProfilePage.jsx";
+import ProductPage from "./pages/ProductPage/ProductPage.jsx";
+import { CartContextProvider } from "./context/CartContext.jsx";
 
 function Main() {
   const [roles, setRoles] = useState([]);
@@ -29,6 +28,7 @@ function Main() {
           <Route path="/about" element={<About />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/product/:id" element={<ProductPage />} />
 
           {/** Private routes */}
           <Route
@@ -51,11 +51,11 @@ function Main() {
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthContextProvider>
-      <BrowserRouter>
-        <Provider store={store}>
-          <Main />
-        </Provider>
-      </BrowserRouter>
+      <CartContextProvider>
+        <BrowserRouter>
+            <Main />
+        </BrowserRouter>
+      </CartContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );

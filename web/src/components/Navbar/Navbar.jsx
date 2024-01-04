@@ -41,10 +41,9 @@ const Navbar = () => {
             <button onClick={() => navigate("/cart")}>Cart</button>
           </li>
           {token && user ? (
-            <>
-              <h1 onClick={() => navigate("/profile")}>{user?.name}</h1>
+            <li>
               <button onClick={handleLogout}>Logout</button>
-            </>
+            </li>
           ) : (
             <li>
               <button onClick={toggleModal}>Log in</button>

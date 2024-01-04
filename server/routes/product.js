@@ -2,6 +2,7 @@ import express from "express";
 import {
   getAllProducts,
   createProduct,
+  getSingleProduct,
 } from "../controllers/productController.js";
 import { authenticate, restrict } from "../auth/verifyToken.js";
 import reviewRouter from "./reviews.js";
@@ -14,6 +15,8 @@ router
   .route("/")
   .get(getAllProducts)
   .post(authenticate, restrict(["admin"]), createProduct);
+
+router.get("/:id", getSingleProduct);
 
 // router.get("/:id", authenticate, restrict(['admin']), getSingleAdmin);
 // router.get("/", authenticate, restrict(['admin']), getAllProducts);
