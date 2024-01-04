@@ -1,0 +1,35 @@
+@font-face {
+  font-family: mplus1;
+  src: url("./font/MPLUS1-VariableFont_wght.ttf");
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: mplus1;
+
+}
+
+#root {
+  padding: 0;
+}
+
+
+html,
+body,
+#root,
+#root > div {
+  height: 100%;
+  background-color: rgba(255, 235, 235, 1);
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+#main {
+  height: 100%;
+  width: 100%;
+}
