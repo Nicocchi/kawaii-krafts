@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema({
     enum: ["customer", "admin"],
     default: "customer",
   },
+  customerId: { type: String, required: true, unique: true },
 }, { timestamps: true });
 
 export default mongoose.model("User", UserSchema);

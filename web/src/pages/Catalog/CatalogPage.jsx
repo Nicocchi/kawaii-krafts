@@ -1,10 +1,9 @@
 import ProductCard from "../../components/ProductCard/ProductCard.jsx";
-import SearchCard from "../../components/SearchCard/SearchCard.jsx";
-import styles from "./home.module.css";
+import styles from "./catalog.module.css";
 const BASE_URL = import.meta.env.VITE_API_URL;
 import useFetchData from "../../hooks/useFetchData";
 
-const Home = () => {
+const Catalog = () => {
   const {
     data: productData,
     loading,
@@ -37,9 +36,9 @@ const Home = () => {
 
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.title}>Featured Products</h1>
+        <h1 className={styles.title}>Catalog</h1>
       <div className={styles.products}>
-        {productData.filter((product) => product.featured).map((product) => (
+        {productData.map((product) => (
           <ProductCard
             key={product?._id}
             value={product}
@@ -50,4 +49,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Catalog;

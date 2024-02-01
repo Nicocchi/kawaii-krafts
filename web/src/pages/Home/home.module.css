@@ -1,7 +1,7 @@
 .wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     padding: 0 20px 0 20px;
 }
 
@@ -17,9 +17,17 @@
 .products {
     display: flex;
     /* margin: 0 auto; */
-    justify-content: center;
+    /* justify-content: center; */
     flex-wrap: wrap;
     gap: 20px;
     width: 100%;
     /* max-width: 1060px; */
+}
+
+.title {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    margin-top: 30px;
 }

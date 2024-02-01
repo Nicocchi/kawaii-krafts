@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
 import useToggle from "../../hooks/useToggle";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
@@ -26,6 +27,7 @@ const LoginModal = ({ visible }) => {
   });
 
   const { dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setShowModal(visible);
@@ -67,6 +69,7 @@ const LoginModal = ({ visible }) => {
       setLoading(false);
       //toast.success(message)
       // navigate to login
+      console.log(message);
     } catch (err) {
       console.error(err.message);
       setLoading(false);
@@ -91,6 +94,8 @@ const LoginModal = ({ visible }) => {
           },
         });
         setLoading(false);
+        setShowModal(false)
+        navigate("/")
       })
       .catch((err) => {
         setLoading(false);

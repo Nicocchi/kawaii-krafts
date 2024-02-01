@@ -11,7 +11,6 @@ function App() {
     <>
       <div>
         <Navbar />
-        { allowedPages.includes(location.pathname) ? <Hero /> : null}
         <div className={styles.main}>
           <Outlet />
           <Footer />

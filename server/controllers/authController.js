@@ -1,7 +1,11 @@
+import dotenv from "dotenv";
+import Stripe from "stripe";
 import User from "../models/userSchema.js";
 import Admin from "../models/adminSchema.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+dotenv.config();
+const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY);
 
 const generateToken = (user) => {
   return jwt.sign(
@@ -32,12 +36,18 @@ export const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     if (role === "customer") {
+      const customer = await stripe.customers.create({
+        name,
+        email,
+      });
+
       user = new User({
         name,
         email,
         password: hashedPassword,
         name,
         role,
+        customerId: customer.id,
       });
     }
 
@@ -56,6 +66,7 @@ export const register = async (req, res) => {
       .status(200)
       .json({ success: true, message: "User successfully created" });
   } catch (err) {
+    console.log(err);
     return res
       .status(500)
       .json({ success: false, message: "Internal server error" });

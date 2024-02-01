@@ -13,7 +13,8 @@ const authReducer = (state, action) => {
       if (state.cart === null) {
         state.cart = {};
       }
-      state.cart[action.payload._id] = action.payload;
+      state.cart[action.payload.product._id] = action.payload.product;
+      state.cart[action.payload.product._id].quantity = action.payload.quantity;
       return {
         cart: state.cart,
       };
@@ -30,8 +31,14 @@ const authReducer = (state, action) => {
         cart: state.cart,
       };
 
+    case "REMOVE_ALL":
+      state.cart = {};
+      return {
+        cart: state.cart
+      };
+
     default:
-      return state;
+      return state;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
   }
 };
 

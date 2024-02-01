@@ -14,7 +14,10 @@ const ProductSchema = new mongoose.Schema({
 
   },
   price: { type: Number, required: true },
+  images: [],
   salePrice: Number,
+  stock: Boolean,
+  featured: Boolean,
   sale: Boolean,
   quantity: { type: Number, required: true },
   reviews: [{ type: mongoose.Types.ObjectId, ref: "Review"}],

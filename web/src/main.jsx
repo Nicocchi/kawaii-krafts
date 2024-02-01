@@ -14,6 +14,10 @@ import ProtectedRoute from "./ProtectedRoute.jsx";
 import ProfilePage from "./pages/Profile/ProfilePage.jsx";
 import ProductPage from "./pages/ProductPage/ProductPage.jsx";
 import { CartContextProvider } from "./context/CartContext.jsx";
+import CancelPage from "./pages/Cancelled/CancelPage.jsx";
+import SuccessPage from "./pages/Success/SuccessPage.jsx";
+import { CatalogContextProvider } from "./context/CatalogContext.jsx";
+import Catalog from "./pages/Catalog/CatalogPage.jsx";
 
 function Main() {
   const [roles, setRoles] = useState([]);
@@ -25,10 +29,12 @@ function Main() {
           {/** Public routes */}
           <Route index element={<Home />} />
 
-          <Route path="/about" element={<About />} />
+          <Route path="/catalog" element={<Catalog />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/cancel" element={<CancelPage />} />
+          <Route path="/success" element={<SuccessPage />} />
 
           {/** Private routes */}
           <Route
@@ -51,11 +57,13 @@ function Main() {
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthContextProvider>
-      <CartContextProvider>
-        <BrowserRouter>
+      <CatalogContextProvider>
+        <CartContextProvider>
+          <BrowserRouter>
             <Main />
-        </BrowserRouter>
-      </CartContextProvider>
+          </BrowserRouter>
+        </CartContextProvider>
+      </CatalogContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );

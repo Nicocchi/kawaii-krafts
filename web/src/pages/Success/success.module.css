@@ -1,0 +1,22 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1088px;
+    align-items: center;
+  }
+
+  .img {
+    width: 100px;
+  }
+
+  .product {
+    display: flex;
+  }
+
+  .productinfo {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+  }

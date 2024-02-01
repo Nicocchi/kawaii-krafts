@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 
+
 const ProductCard = ({ value }) => {
   const [item, setItem] = useState();
 
@@ -14,6 +15,8 @@ const ProductCard = ({ value }) => {
   const navigate = useNavigate();
 
   const { dispatch } = useContext(CartContext);
+
+  
 
   return (
     <div className={styles.wrapper}>
@@ -37,14 +40,14 @@ const ProductCard = ({ value }) => {
         </p>
         <button
           className={styles.buy}
-          onClick={() =>
-            dispatch({
-              type: "ADD",
-              payload: value,
-            })
-          }
+          // onClick={() =>
+          //   dispatch({
+          //     type: "ADD",
+          //     payload: value,
+          //   })
+          // }
         >
-          Buy
+          {value?.stock? "In Stock" : "Out of Stock"}
         </button>
       </div>
     </div>

@@ -5,6 +5,8 @@ import { useState, useContext } from "react";
 import useToggle from "../../hooks/useToggle";
 import { AuthContext } from "../../context/AuthContext";
 import Modal from "../core/Modal/Modal";
+import { FaShoppingCart } from "react-icons/fa";
+import { MdAccountCircle } from "react-icons/md";
 
 const Navbar = () => {
   const [visible, setVisible] = useToggle();
@@ -32,23 +34,28 @@ const Navbar = () => {
             <button onClick={() => navigate("/")}>Home</button>
           </li>
           <li>
-            <button onClick={() => navigate("/about")}>About</button>
+            <button onClick={() => navigate("/catalog")}>Catalog</button>
           </li>
           <li>
             <button onClick={() => navigate("/faq")}>Faq</button>
           </li>
           <li>
-            <button onClick={() => navigate("/cart")}>Cart</button>
+            <button onClick={() => navigate("/faq")}>Contact</button>
           </li>
+          {/* <li>
+            <button onClick={() => navigate("/cart")}>Cart</button>
+          </li> */}
           {token && user ? (
             <li>
               <button onClick={handleLogout}>Logout</button>
+              {/* <MdAccountCircle size={25} /> */}
             </li>
           ) : (
             <li>
               <button onClick={toggleModal}>Log in</button>
             </li>
           )}
+            <FaShoppingCart size={25} onClick={() => navigate("/cart")} />
         </ul>
       </div>
       <Modal visible={visible} toggleModal={toggleModal}>

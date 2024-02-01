@@ -10,6 +10,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   padding-right: 26px;
+  /* padding-left: 26px; */
   margin-top: 68px;
   align-items: center;
   overflow: hidden;

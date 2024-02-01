@@ -1,9 +1,26 @@
 import styles from "./cart.module.css";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../context/CartContext";
+import { BASE_URL } from "../../config";
+import useFetchData from "../../hooks/useFetchData";
+import { AuthContext } from "../../context/AuthContext";
+
+import {loadStripe} from '@stripe/stripe-js';
+import {
+  EmbeddedCheckoutProvider,
+  EmbeddedCheckout
+} from '@stripe/react-stripe-js';
+import { redirect, useNavigate } from "react-router-dom";
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
+
+const toDollars = (value) => {  
+  return (value / 100).toLocaleString("en-US", {style:"currency", currency:"USD"});
+}
 
 const Cart = () => {
   const { dispatch, cart } = useContext(CartContext);
+  const { token, user } = useContext(AuthContext);
+  const [clientSecret, setClientSecret] = useState('');
 
   const onQuantityChange = (e, item) => {
     let quantity = e.target.value;
@@ -12,6 +29,40 @@ const Cart = () => {
       type: "UPDATE",
       payload: item,
     })
+  }
+
+  const onCheckout = async () => {
+
+    try {
+      const res = await fetch(`${BASE_URL}/orders/create-checkout-session`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({cart: Object.values(cart), customerId: user.customerId}),
+      });
+
+      const result = await res.json();
+
+      console.log(result);
+
+      window.location.href = result.url;
+
+      dispatch({
+        type: "REMOVE_ALL",
+      })
+
+      // const { message } = await res.json();
+
+      // console.log(message);
+
+      // if (!res.ok) {
+      //   throw new Error(message);
+      // }
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   const USDollar = new Intl.NumberFormat('en-US', {
@@ -35,6 +86,7 @@ const Cart = () => {
   }
 
   return (
+    <>
     <div className={styles.wrapper}>
       <span className={styles.span}>
         <p></p>
@@ -51,7 +103,7 @@ const Cart = () => {
               <img src="" className={styles.img} />
               <p>{cart[itm].title}</p>
               <input name="quantity" className={styles.number} onChange={(e) => onQuantityChange(e, cart[itm])} value={cart[itm].quantity} type="number" />
-              <p>{USDollar.format(cart[itm].price * cart[itm].quantity)}</p>
+              <p>{toDollars(cart[itm].price * cart[itm].quantity)}</p>
               <button
               className={styles.button}
                 onClick={() =>
@@ -69,8 +121,19 @@ const Cart = () => {
           );
         })}
       </div>
-      <button className={styles.button}>Continue to Checkout</button>
+      <button className={styles.button} onClick={onCheckout}>Continue to Checkout</button>
     </div>
+    <div className={styles.checkout}>
+    {clientSecret && (
+        <EmbeddedCheckoutProvider
+          stripe={stripePromise}
+          options={{clientSecret}}
+        >
+          <EmbeddedCheckout />
+        </EmbeddedCheckoutProvider>
+      )}
+      </div>
+    </>
   );
 };
 
