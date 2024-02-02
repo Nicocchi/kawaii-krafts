@@ -33,3 +33,125 @@ html {
   height: 100%;
   width: 100%;
 }
+
+.relative {
+  position: relative;
+  width: auto;
+  margin-right: 30px;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.rotate-0 {
+  transform: rotate(0deg);
+}
+
+.dropdown-content {
+  position: absolute;
+  z-index: 20;
+  overflow: hidden;
+  overflow-y: auto;
+  background-color: #ffffff;
+  border: 1px solid rgb(209, 213, 219);
+  border-radius: 0.25rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 200px;
+}
+
+.dropdown-button {
+  /* padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  color: #ffffff;
+  background-color: rgb(31, 41, 55);
+  border-radius: 0.25rem;
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-transform: none;
+  gap: 10px; */
+
+  color: rgba(170, 130, 140, 1);
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  border: none;
+  background-color: transparent;
+  text-transform: uppercase;
+  cursor: pointer;
+  height: 100%;
+
+  /* display: block; */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  padding: 0.2em 0;
+  margin-left: 20px;
+}
+
+.dropdown-button::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 0.2em;
+  background-color: rgba(170, 130, 140, 1);
+  opacity: 0;
+  transition: opacity 300ms, transform 300ms;
+}
+
+.dropdown-button::after {
+  opacity: 1;
+  transform: scale(0);
+  transform-origin: center;
+}
+
+.dropdown-button:hover::after,
+.dropdown-button:focus::after {
+  transform: scale(1);
+}
+
+.hidden {
+  display: none;
+}
+
+.dropdown-list {
+  
+}
+
+.dropdown-list ul, li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-item {
+  white-space: nowrap;
+  text-decoration: none;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+  cursor: pointer;
+  background-color: transparent;
+  background-image: none;
+  text-transform: none;
+  height: 48px;
+}
+
+.dropdown-item:hover {
+  text-decoration: underline;
+}

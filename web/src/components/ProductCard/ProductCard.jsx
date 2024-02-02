@@ -39,6 +39,7 @@ const ProductCard = ({ value }) => {
           Yazawa Nico Christmas Sticker
         </p>
         <button
+          disabled={!value?.stock}
           className={styles.buy}
           // onClick={() =>
           //   dispatch({

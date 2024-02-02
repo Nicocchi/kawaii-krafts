@@ -81,3 +81,28 @@
 .nav > ul > li > button:focus::after {
   transform: scale(1);
 }
+
+.icon {
+  color: rgba(170, 130, 140, 1);
+  cursor: pointer;
+}
+
+.icon::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 0.2em;
+  background-color: rgba(170, 130, 140, 1);
+  opacity: 0;
+  transition: opacity 300ms, transform 300ms;
+  opacity: 1;
+  transform: scale(0);
+  transform-origin: center;
+}
+
+.icon:hover::after,
+.icon:focus::after {
+  transform: scale(1);
+}

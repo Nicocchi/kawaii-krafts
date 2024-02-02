@@ -7,6 +7,8 @@ import { AuthContext } from "../../context/AuthContext";
 import Modal from "../core/Modal/Modal";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdAccountCircle } from "react-icons/md";
+import { Dropdown } from "../../context/DropdownContext";
+
 
 const Navbar = () => {
   const [visible, setVisible] = useToggle();
@@ -46,16 +48,23 @@ const Navbar = () => {
             <button onClick={() => navigate("/cart")}>Cart</button>
           </li> */}
           {token && user ? (
-            <li>
-              <button onClick={handleLogout}>Logout</button>
-              {/* <MdAccountCircle size={25} /> */}
-            </li>
+            <Dropdown>
+              <Dropdown.Button>{user?.name}</Dropdown.Button>
+              <Dropdown.Content>
+                <Dropdown.List>
+                  <Dropdown.Item>Profile</Dropdown.Item>
+                  <Dropdown.Item>Billing</Dropdown.Item>
+                  <Dropdown.Item onClick={() => navigate("/orders")}>Orders</Dropdown.Item>
+                  <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                </Dropdown.List>
+              </Dropdown.Content>
+            </Dropdown>
           ) : (
             <li>
               <button onClick={toggleModal}>Log in</button>
             </li>
           )}
-            <FaShoppingCart size={25} onClick={() => navigate("/cart")} />
+          <FaShoppingCart size={25} className={styles.icon} onClick={() => navigate("/cart")} />
         </ul>
       </div>
       <Modal visible={visible} toggleModal={toggleModal}>

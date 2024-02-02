@@ -104,8 +104,8 @@ const ProductPage = () => {
             </div>
           </div>
           <div className={styles.rightB}>
-            <button className={styles.buy} onClick={addToCart}>
-              Add to Cart
+            <button className={styles.buy} disabled={!productData[0]?.stock} onClick={addToCart}>
+              {productData[0]?.stock ? "Add to Cart" : "Out of Stock"}
             </button>
           </div>
         </div>

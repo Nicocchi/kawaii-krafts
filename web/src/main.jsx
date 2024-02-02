@@ -18,6 +18,7 @@ import CancelPage from "./pages/Cancelled/CancelPage.jsx";
 import SuccessPage from "./pages/Success/SuccessPage.jsx";
 import { CatalogContextProvider } from "./context/CatalogContext.jsx";
 import Catalog from "./pages/Catalog/CatalogPage.jsx";
+import OrdersPage from "./pages/Orders/OrderPage.jsx";
 
 function Main() {
   const [roles, setRoles] = useState([]);
@@ -30,6 +31,7 @@ function Main() {
           <Route index element={<Home />} />
 
           <Route path="/catalog" element={<Catalog />} />
+          <Route path="/orders" element={<OrdersPage />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<ProductPage />} />
