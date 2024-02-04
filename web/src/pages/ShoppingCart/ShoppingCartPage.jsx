@@ -25,6 +25,7 @@ const Cart = () => {
   const { dispatch, cart } = useContext(CartContext);
   const { token, user } = useContext(AuthContext);
   const [clientSecret, setClientSecret] = useState("");
+  const navigate = useNavigate();
 
   const onQuantityChange = (e, item) => {
     let quantity = e.target.value;
@@ -71,23 +72,22 @@ const Cart = () => {
     }
   };
 
-  const USDollar = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-
   if (cart === null) {
     return (
-      <div className={styles.wrapper}>
-        <span className={styles.span}>
-          <p></p>
-          <p>Product</p>
-          <p>Quantity</p>
-          <p>Price</p>
-          <p></p>
-        </span>
-        <button className={styles.button}>Continue to Checkout</button>
-      </div>
+      <>
+        <div className={styles.wrapper}>
+          <div className={styles.titleWrapper}>
+            <h1 className={styles.title}>Cart</h1>
+          </div>
+          <p>Your cart is empty.</p>
+          <button
+            className={styles.button}
+            onClick={() => navigate("/catalog")}
+          >
+            Start Shopping
+          </button>
+        </div>
+      </>
     );
   }
 
@@ -95,7 +95,7 @@ const Cart = () => {
     <>
       <div className={styles.wrapper}>
         <div className={styles.titleWrapper}>
-        <h1 className={styles.title}>Cart</h1>
+          <h1 className={styles.title}>Cart</h1>
         </div>
         <table className={styles.table}>
           <thead>
@@ -112,7 +112,10 @@ const Cart = () => {
               return (
                 <tr key={cart[itm]._id}>
                   <td>
-                    <img src={`/img/${cart[itm]?.images[0]}`} className={styles.img} />
+                    <img
+                      src={`/img/${cart[itm]?.images[0]}`}
+                      className={styles.img}
+                    />
                   </td>
                   <td>
                     <p>{cart[itm].title}</p>
