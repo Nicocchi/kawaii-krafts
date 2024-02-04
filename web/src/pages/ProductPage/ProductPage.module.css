@@ -37,8 +37,15 @@
   margin-top: 30px;
 }
 
-.img {
+.imgWrapper {
   width: 90%;
+  max-height: 442px;
+  overflow-y: hidden;
+  
+}
+
+.img {
+  width: 100%;
 }
 
 .span {

@@ -14,17 +14,29 @@ import reviewRoute from "./routes/reviews.js";
 import productRoute from "./routes/product.js";
 import skuRoute from "./routes/skus.js";
 import checkoutRoute from "./routes/checkout.js";
+import bodyParser from "body-parser";
+
+const imageDir = process.env.IMAGE_DIR || "public";
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 8000;
 
-app.use(express.static('public'));
+app.use('/static', express.static(imageDir))
+
+// middleware
+// app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 const corsOptions = {
   origin: true, // TODO: Remove from prod
 };
+app.use(cors(corsOptions));
+
+
 
 app.post('/webhook', express.raw({ type: 'application/json'}), (req, res) => {
   const sig = req.headers['stripe-signature'];
@@ -84,10 +96,7 @@ const connectDB = async () => {
   }
 };
 
-// middleware
-app.use(express.json());
-app.use(cookieParser());
-app.use(cors(corsOptions));
+
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/admins", adminRoute);

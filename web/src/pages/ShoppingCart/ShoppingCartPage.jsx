@@ -4,6 +4,7 @@ import { CartContext } from "../../context/CartContext";
 import { BASE_URL } from "../../config";
 import useFetchData from "../../hooks/useFetchData";
 import { AuthContext } from "../../context/AuthContext";
+const BASE_URL_CDN = import.meta.env.VITE_IMAGES_CDN;
 
 import { loadStripe } from "@stripe/stripe-js";
 import {
@@ -113,7 +114,7 @@ const Cart = () => {
                 <tr key={cart[itm]._id}>
                   <td>
                     <img
-                      src={`/img/${cart[itm]?.images[0]}`}
+                      src={`${BASE_URL_CDN}/${cart[itm]?.images[0]}`}
                       className={styles.img}
                     />
                   </td>

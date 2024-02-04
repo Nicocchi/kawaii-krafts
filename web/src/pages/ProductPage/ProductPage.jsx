@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
 import toast, { Toaster } from "react-hot-toast";
+const BASE_URL_CDN = import.meta.env.VITE_IMAGES_CDN;
 
 const ProductPage = () => {
   const params = useParams();
@@ -73,11 +74,13 @@ const ProductPage = () => {
     <div className={styles.wrapper}>
       <div className={styles.top}>
         <div className={styles.left}>
+          <div className={styles.imgWrapper}>
           <img
-            src={`/img/${productData[0]?.images[0]}`}
+            src={`${BASE_URL_CDN}/${productData[0]?.images[0]}`}
             alt="Yazawa Nico Christmas Sticker"
             className={styles.img}
           />
+          </div>
         </div>
         <div className={styles.right}>
           <div className={styles.rightT}>
