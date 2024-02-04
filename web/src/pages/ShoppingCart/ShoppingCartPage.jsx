@@ -13,6 +13,7 @@ import {
 import { redirect, useNavigate } from "react-router-dom";
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
 
+// TODO (Nico): Refactor into separate file to import
 const toDollars = (value) => {
   return (value / 100).toLocaleString("en-US", {
     style: "currency",

@@ -84,6 +84,15 @@
   margin-bottom: 10px;
 }
 
+.summary {
+  padding-top: 10px;
+  height: 100%;
+  width: 100%;
+  max-width: 320px;
+  max-height: 130px;
+  overflow-y: hidden;
+}
+
 .buy {
   width: 100%;
   max-width: 320px;

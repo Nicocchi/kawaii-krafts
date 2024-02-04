@@ -4,6 +4,14 @@ import useFetchData from "../../hooks/useFetchData";
 import styles from "./success.module.css";
 import { useContext, useEffect, useState } from "react";
 
+// TODO (Nico): Refactor into separate file to import
+const toDollars = (value) => {
+  return (value / 100).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+};
+
 const SuccessPage = () => {
   const { token, user } = useContext(AuthContext);
   const [images, setImages] = useState([]);
@@ -42,43 +50,55 @@ const SuccessPage = () => {
     );
   }
 
-  console.log(payments[0])
+  const paidOn = new Date(payments[0]?.period_end);
 
   return (
     <div className={styles.wrapper}>
-      <h1>Order Purchased.</h1>
-      <div className={styles.product}>
+      <div className={styles.titleWrapper}>
+        <div>
+          <h1 className={styles.title}>Order Success</h1>
+          <p>
+            Thank you for shopping with us! We really appreciate your service.
+            We will begin working on your order ASAP and will email you shipping
+            details within the next 12 hours.
+          </p>
+        </div>
+      </div>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
               <img
-                className={styles.img}
-                src={`${BASE_URL_N}/images/${findImageSrc(
+                src={`/img/${findImageSrc(
                   payments[0]?.lines?.data[0]?.price.product
                 )}`}
-              />
-              <div className={styles.productinfo}>
-                <p>{payments[0]?.lines?.data[0]?.description}</p>
-                <p>Quantity: {payments[0]?.lines?.data[0]?.quantity}</p>
-              </div>
-            </div>
-      {/* {payments?.map((invoices) => {
-        console.log(payments)
-        return invoices?.lines?.data.map((product, i) => {
-          console.log(product);
-          return (
-            <div key={i} className={styles.product}>
-              <img
                 className={styles.img}
-                src={`${BASE_URL_N}/images/${findImageSrc(
-                  product.price.product
-                )}`}
               />
-              <div className={styles.productinfo}>
-                <p>{product.description}</p>
-                <p>Quantity: {product.quantity}</p>
-              </div>
-            </div>
-          );
-        });
-      })} */}
+            </td>
+            <td>
+              <p>{payments[0]?.lines?.data[0]?.description}</p>
+            </td>
+            <td>
+              <p>{payments[0]?.lines?.data[0]?.quantity}</p>
+            </td>
+            <td>
+              <p>{`${toDollars(payments[0]?.total)} USD`}</p>
+            </td>
+            <td>
+              <p>{paidOn.toDateString()}</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };

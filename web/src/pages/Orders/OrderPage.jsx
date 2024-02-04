@@ -13,6 +13,7 @@ import {
 import { redirect, useNavigate } from "react-router-dom";
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
 
+// TODO (Nico): Refactor into separate file to import
 const toDollars = (value) => {
   return (value / 100).toLocaleString("en-US", {
     style: "currency",
@@ -89,29 +90,6 @@ const OrdersPage = () => {
                     )
                 })
             }
-            {/* {Object.keys(cart).map((itm) => {
-              return (
-                <tr key={cart[itm]._id}>
-                  <td>
-                    <img src={`/img/${cart[itm]?.images[0]}`} className={styles.img} />
-                  </td>
-                  <td><p>{cart[itm].title}</p></td>
-                  <td>
-                    <input
-                      name="quantity"
-                      className={styles.number}
-                      onChange={(e) => onQuantityChange(e, cart[itm])}
-                        value={cart[itm].quantity}
-                      type="number"
-                    />
-                  </td>
-                  <td>
-                    <p>{toDollars(cart[itm].price * cart[itm].quantity)}</p>
-                  </td>
-                  <td></td>
-                </tr>
-              );
-            })} */}
           </tbody>
         </table>
       </div>

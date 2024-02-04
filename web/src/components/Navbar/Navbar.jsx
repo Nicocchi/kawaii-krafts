@@ -25,6 +25,10 @@ const Navbar = () => {
     dispatch({ type: "LOGOUT" });
   };
 
+  const goToBilling = () => {
+    window.location.href = "https://billing.stripe.com/p/login/test_8wM4kk9sR8rI9J65kk";
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.logo}>
@@ -42,7 +46,7 @@ const Navbar = () => {
             <button onClick={() => navigate("/faq")}>Faq</button>
           </li>
           <li>
-            <button onClick={() => navigate("/faq")}>Contact</button>
+            <button onClick={() => navigate("/contact")}>Contact</button>
           </li>
           {/* <li>
             <button onClick={() => navigate("/cart")}>Cart</button>
@@ -53,7 +57,7 @@ const Navbar = () => {
               <Dropdown.Content>
                 <Dropdown.List>
                   <Dropdown.Item>Profile</Dropdown.Item>
-                  <Dropdown.Item>Billing</Dropdown.Item>
+                  <Dropdown.Item onClick={goToBilling}>Billing</Dropdown.Item>
                   <Dropdown.Item onClick={() => navigate("/orders")}>Orders</Dropdown.Item>
                   <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                 </Dropdown.List>

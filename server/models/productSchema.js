@@ -18,6 +18,7 @@ const ProductSchema = new mongoose.Schema({
   salePrice: Number,
   stock: Boolean,
   featured: Boolean,
+  summary: String,
   sale: Boolean,
   quantity: { type: Number, required: true },
   reviews: [{ type: mongoose.Types.ObjectId, ref: "Review"}],

@@ -18,6 +18,7 @@ const ProductPage = () => {
   const { dispatch } = useContext(CartContext);
   const notify = () => toast("Added to cart");
 
+  // TODO (Nico): Refactor into separate file to import
   const toDollars = (value) => {  
     return (value / 100).toLocaleString("en-US", {style:"currency", currency:"USD"});
   }
@@ -101,6 +102,9 @@ const ProductPage = () => {
                 onChange={(e) => handleInputChange(e)}
               />
               <button className={styles.plus} onClick={increment}></button>
+            </div>
+            <div className={styles.summary}>
+            <p>{productData[0]?.summary}</p>
             </div>
           </div>
           <div className={styles.rightB}>
