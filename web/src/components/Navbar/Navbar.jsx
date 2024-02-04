@@ -43,7 +43,7 @@ const Navbar = () => {
             <button onClick={() => navigate("/catalog")}>Catalog</button>
           </li>
           <li>
-            <button onClick={() => navigate("/faq")}>Faq</button>
+            <button onClick={() => navigate("/about")}>About</button>
           </li>
           <li>
             <button onClick={() => navigate("/contact")}>Contact</button>

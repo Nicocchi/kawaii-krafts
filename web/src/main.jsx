@@ -8,7 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext.jsx";
 
 import About from "./pages/About/AboutPage.jsx";
-import FAQ from "./pages/FAQ/FAQPage.jsx";
+import Contact from "./pages/Contact/ContactPage.jsx";
 import Cart from "./pages/ShoppingCart/ShoppingCartPage.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
 import ProfilePage from "./pages/Profile/ProfilePage.jsx";
@@ -19,6 +19,9 @@ import SuccessPage from "./pages/Success/SuccessPage.jsx";
 import { CatalogContextProvider } from "./context/CatalogContext.jsx";
 import Catalog from "./pages/Catalog/CatalogPage.jsx";
 import OrdersPage from "./pages/Orders/OrderPage.jsx";
+import PrivacyPolicyPage from "./pages/PrivacyPolicy/PrivacyPolicyPage.jsx";
+import TOSPage from "./pages/TOS/TOSPage.jsx";
+import ReturnPolicyPage from "./pages/ReturnPolicy/ReturnPolicyPage.jsx";
 
 function Main() {
   const [roles, setRoles] = useState([]);
@@ -32,7 +35,11 @@ function Main() {
 
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/orders" element={<OrdersPage />} />
-          <Route path="/faq" element={<FAQ />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/terms" element={<TOSPage />} />
+          <Route path="/return-policy" element={<ReturnPolicyPage />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/cancel" element={<CancelPage />} />

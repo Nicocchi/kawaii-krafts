@@ -3,18 +3,17 @@ import styles from "./about.module.css";
 const About = () => {
   return (
     <div className={styles.wrapper}>
-      <h1>About</h1>
-      <p className={styles.about}>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book. It has survived not only five
-        centuries, but also the leap into electronic typesetting, remaining
-        essentially unchanged. It was popularised in the 1960s with the release
-        of Letraset sheets containing Lorem Ipsum passages, and more recently
-        with desktop publishing software like Aldus PageMaker including versions
-        of Lorem Ipsum.
-      </p>
+      <div className={styles.titleWrapper}>
+        <div>
+          <h1 className={styles.title}>About Kawaii Krafts</h1>
+          <p>
+            Kawaii Krafts was started by Jeremy Boggs, a software engineer and
+            artist struggling to find work. So, I decided to start selling my
+            custom artworks with a shop that I built from the ground up by
+            myself as a display of what I am capable of making.
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

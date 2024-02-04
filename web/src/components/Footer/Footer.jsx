@@ -5,9 +5,9 @@ const Footer = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.links}>
-        <NavLink className={styles.link}>Terms</NavLink>
-        <NavLink className={styles.link}>Privacy Policy</NavLink>
-        <NavLink className={styles.link}>Return Policy</NavLink>
+        <NavLink className={styles.link} to="/terms">Terms</NavLink>
+        <NavLink className={styles.link} to="/privacy-policy">Privacy Policy</NavLink>
+        <NavLink className={styles.link} to="/return-policy">Return Policy</NavLink>
       </div>
       <p className={styles.copyright}>
         Copyright © Nicocchi / All Rights Reserved

@@ -5,7 +5,7 @@
   padding: 0 20px 0 20px;
 }
 
-.about {
+.contact {
   width: 100%;
   max-width: 700px;
   margin-top: 16px;
@@ -23,4 +23,15 @@
   text-transform: uppercase;
   margin-bottom: 30px;
   margin-top: 30px;
+}
+
+/* .span {
+    display: flex;
+    gap: 10px;
+  }
+   */
+
+.email {
+    color: #024983;
+    font-weight: 700;
 }
