@@ -173,7 +173,29 @@ export const forgot = async (req, res) => {
 
     const token = jwt.sign(payload, secret, { expiresIn: "15m" });
     const link = `http://localhost:5173/auth/reset/${user._id}/${token}`;
-    console.log(link);
+
+    // email user
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      host: "smtp.gmail.net",
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+
+    const info = await transporter.sendMail({
+      from: {
+        name: "Kawaii Krafts",
+        address: process.env.EMAIL_USER,
+      },
+      to: [email],
+      subject: "Reset Password",
+      text: "Reset password",
+      html: `<p>Here is a link to reset your password. The link will expire in 15 minutes</p><a href="${link}">Click here to reset password</a>`,
+    });
 
     return res
       .status(200)
