@@ -22,6 +22,7 @@ import OrdersPage from "./pages/Orders/OrderPage.jsx";
 import PrivacyPolicyPage from "./pages/PrivacyPolicy/PrivacyPolicyPage.jsx";
 import TOSPage from "./pages/TOS/TOSPage.jsx";
 import ReturnPolicyPage from "./pages/ReturnPolicy/ReturnPolicyPage.jsx";
+import ResetPasswordPage from "./pages/ResetPassword/ResetPasswordPage.jsx";
 
 function Main() {
   const [roles, setRoles] = useState([]);
@@ -44,6 +45,7 @@ function Main() {
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/cancel" element={<CancelPage />} />
           <Route path="/success" element={<SuccessPage />} />
+          <Route path="/auth/reset/:id/:token" element={<ResetPasswordPage />} />
 
           {/** Private routes */}
           <Route

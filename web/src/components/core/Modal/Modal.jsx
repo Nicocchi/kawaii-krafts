@@ -11,7 +11,7 @@ const Modal = ({ toggleModal, visible, children }) => {
   return (
     <>
       {visible && (
-        <div clasName={styles.wrapper}>
+        <div className={styles.wrapper}>
           <div className={styles.overlay} onClick={toggleModal}></div>
           <div className={styles.content}>
             {children}

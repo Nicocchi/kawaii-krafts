@@ -4,6 +4,7 @@ import styles from "./login.module.css";
 import useToggle from "../../hooks/useToggle";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
 import { BASE_URL } from "../../config.js";
+import toast, { Toaster } from "react-hot-toast";
 
 import { AuthContext } from "../../context/AuthContext";
 
@@ -13,6 +14,8 @@ const LoginModal = ({ visible }) => {
   const [showModal, setShowModal] = useState(false);
   const [form, setForm] = useToggle();
   const [loading, setLoading] = useState(false);
+  const [passwordReset, setPasswordReset] = useState(false);
+  const [resetting, setResetting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,11 +23,15 @@ const LoginModal = ({ visible }) => {
     confirmPassword: "",
     role: "customer",
   });
-
+  const [resetFormData, setResetFormData] = useState({
+    email: "",
+  });
   const [loginFormData, setLoginFormData] = useState({
     email: "",
     password: "",
   });
+
+  // const notify = () => toast("Added to cart");
 
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -47,6 +54,10 @@ const LoginModal = ({ visible }) => {
     setLoginFormData({ ...loginFormData, [e.target.name]: e.target.value });
   };
 
+  const onHandleResetInputChange = (e) => {
+    setResetFormData({ ...resetFormData, [e.target.name]: e.target.value });
+  };
+
   const onRegisterSubmitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -67,6 +78,7 @@ const LoginModal = ({ visible }) => {
       }
 
       setLoading(false);
+      toast("Successfully registered.");
       //toast.success(message)
       // navigate to login
       console.log(message);
@@ -94,8 +106,30 @@ const LoginModal = ({ visible }) => {
           },
         });
         setLoading(false);
-        setShowModal(false)
-        navigate("/")
+        setShowModal(false);
+        toast("Successfully logged in");
+        navigate("/");
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.error(err);
+      });
+
+    setLoading(true);
+  };
+
+  const onResetSubmitHandler = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    console.log(resetFormData);
+    axios
+      .post("/auth/forgot", JSON.stringify(resetFormData), {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((res) => {
+        setLoading(false);
+        setResetting(true);
       })
       .catch((err) => {
         setLoading(false);
@@ -179,19 +213,56 @@ const LoginModal = ({ visible }) => {
     );
   };
 
+  if (passwordReset) {
+    return (
+      <div>
+        <form className={styles.form} onSubmit={onResetSubmitHandler}>
+          {resetting ? (
+            <p>
+              If an account exists with this email, further instructions will be
+              sent to the email given
+            </p>
+          ) : (
+            <input
+              name="email"
+              placeholder="Email"
+              type="email"
+              className={styles.input}
+              pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+              onChange={onHandleResetInputChange}
+              required
+            />
+          )}
+
+          <div>
+            <button className={styles.button} onClick={onResetSubmitHandler}>
+              Reset
+            </button>
+          </div>
+        </form>
+      </div>
+    );
+  }
+
   return (
-    <div
-      className={styles.wrapper}
-    >
+    <div className={styles.wrapper}>
       {form ? registerForm() : loginForm()}
       <div>
         {!form ? (
-          <span className={styles.span}>
-            <p>Don't have an account?</p>
-            <p className={styles.link} onClick={setForm}>
-              Register
-            </p>
-          </span>
+          <>
+            <span className={styles.span}>
+              <p>Don't have an account?</p>
+              <p className={styles.link} onClick={setForm}>
+                Register
+              </p>
+            </span>
+            <span className={styles.span}>
+              <p>Forgot password?</p>
+              <p className={styles.link} onClick={() => setPasswordReset(true)}>
+                Reset Password
+              </p>
+            </span>
+          </>
         ) : (
           <span className={styles.span}>
             <p>Have an account?</p>
@@ -201,6 +272,7 @@ const LoginModal = ({ visible }) => {
           </span>
         )}
       </div>
+      <Toaster />
     </div>
   );
 };

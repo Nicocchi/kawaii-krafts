@@ -74,7 +74,6 @@
   letter-spacing: 1.2px;
   text-decoration: none;
   text-transform: uppercase;
-  margin-top: 20px;
 }
 
 .button:hover {
@@ -103,6 +102,7 @@
   color: rgba(68, 161, 131, 1);
   /* color: #ffffff; */
   text-align: left;
+
 }
 
 .table th,
