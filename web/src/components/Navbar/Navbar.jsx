@@ -56,7 +56,7 @@ const Navbar = () => {
               <Dropdown.Button>{user?.name}</Dropdown.Button>
               <Dropdown.Content>
                 <Dropdown.List>
-                  <Dropdown.Item>Profile</Dropdown.Item>
+                  <Dropdown.Item onClick={() => navigate("/profile")} >Profile</Dropdown.Item>
                   <Dropdown.Item onClick={goToBilling}>Billing</Dropdown.Item>
                   <Dropdown.Item onClick={() => navigate("/orders")}>Orders</Dropdown.Item>
                   <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>

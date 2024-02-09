@@ -122,7 +122,6 @@ const LoginModal = ({ visible }) => {
     e.preventDefault();
     setLoading(true);
 
-    console.log(resetFormData);
     axios
       .post("/auth/forgot", JSON.stringify(resetFormData), {
         headers: { "Content-Type": "application/json" },

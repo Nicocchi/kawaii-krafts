@@ -12,6 +12,8 @@ const ProfilePage = () => {
     error,
   } = useGetProfile(`${BASE_URL}/users/profile/me`);
 
+  console.log(userData);
+
   const toggleModal = () => {
       setModal(!modal);
   }

@@ -27,11 +27,9 @@ const ResetPasswordPage = () => {
       )
       .then((res) => {
         setLoading(false);
-        console.log(res);
       })
       .catch((err) => {
         setLoading(false);
-        console.error(err);
       });
 
     setLoading(true);

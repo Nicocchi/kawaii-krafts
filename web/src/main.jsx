@@ -43,6 +43,7 @@ function Main() {
           <Route path="/return-policy" element={<ReturnPolicyPage />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/cancel" element={<CancelPage />} />
           <Route path="/success" element={<SuccessPage />} />
           <Route path="/auth/reset/:id/:token" element={<ResetPasswordPage />} />
