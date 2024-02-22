@@ -7,7 +7,6 @@ const initialState = {
 const authReducer = (state, action) => {
   switch (action.type) {
     case "ADD":
-        console.log("ADD", action.payload)
       return (state.catalog = action.payload);
 
     default:

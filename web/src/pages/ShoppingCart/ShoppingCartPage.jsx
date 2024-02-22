@@ -53,21 +53,11 @@ const Cart = () => {
 
       const result = await res.json();
 
-      console.log(result);
-
       window.location.href = result.url;
 
       dispatch({
         type: "REMOVE_ALL",
       });
-
-      // const { message } = await res.json();
-
-      // console.log(message);
-
-      // if (!res.ok) {
-      //   throw new Error(message);
-      // }
     } catch (err) {
       console.error(err);
     }

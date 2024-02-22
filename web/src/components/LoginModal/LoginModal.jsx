@@ -80,9 +80,6 @@ const LoginModal = ({ visible }) => {
 
       setLoading(false);
       toast("Successfully registered.");
-      //toast.success(message)
-      // navigate to login
-      console.log(message);
     } catch (err) {
       console.error(err.message);
       setLoading(false);

@@ -57,11 +57,9 @@ app.post('/webhook', express.raw({ type: 'application/json'}), (req, res) => {
       break;
     case 'checkout.session.completed':
       const checkoutSessionCompleted = event.data.object;
-      console.log(checkoutSessionCompleted);
       break;
     case 'customer.created':
       const customerCreated = event.data.object;
-      console.log(customerCreated);
       break;
     // ... handle other event types
     default:
