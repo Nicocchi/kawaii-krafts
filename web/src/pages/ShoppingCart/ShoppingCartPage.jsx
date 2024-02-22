@@ -5,6 +5,7 @@ import { BASE_URL } from "../../config";
 import useFetchData from "../../hooks/useFetchData";
 import { AuthContext } from "../../context/AuthContext";
 const BASE_URL_CDN = import.meta.env.VITE_IMAGES_CDN;
+import toast, { Toaster } from "react-hot-toast";
 
 import { loadStripe } from "@stripe/stripe-js";
 import {
@@ -59,7 +60,9 @@ const Cart = () => {
         type: "REMOVE_ALL",
       });
     } catch (err) {
-      console.error(err);
+      // console.error(err);
+      toast("Need to be logged in to checkout");
+
     }
   };
 
@@ -157,6 +160,7 @@ const Cart = () => {
           </EmbeddedCheckoutProvider>
         )}
       </div>
+      <Toaster />
     </>
   );
 };
