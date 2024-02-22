@@ -32,7 +32,7 @@ const Navbar = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.logo}>
-        <img src="./img/logo.png" />
+        <img src="./img/logo.png" onClick={() => navigate("/")} />
       </div>
       <div className={styles.nav}>
         <ul>

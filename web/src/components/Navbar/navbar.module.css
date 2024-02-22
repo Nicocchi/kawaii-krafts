@@ -20,6 +20,7 @@
   display: flex;
   align-items: center;
   width: 291px;
+  cursor: pointer;
 }
 
 .nav > ul {
