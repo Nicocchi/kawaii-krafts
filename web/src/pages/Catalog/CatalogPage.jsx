@@ -2,6 +2,7 @@ import ProductCard from "../../components/ProductCard/ProductCard.jsx";
 import styles from "./catalog.module.css";
 const BASE_URL = import.meta.env.VITE_API_URL;
 import useFetchData from "../../hooks/useFetchData";
+import loadingIcon from "../../components/LoadingIcon/LoadingIcon.svg";
 
 const Catalog = () => {
   const {
@@ -14,7 +15,7 @@ const Catalog = () => {
     return (
       <div className={styles.wrapper}>
         <div className={styles.products}>
-          <h1>Loading</h1>
+        <img src={loadingIcon} width={200} />
         </div>
       </div>
     );

@@ -12,6 +12,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { redirect, useNavigate } from "react-router-dom";
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
+import loadingIcon from "../../components/LoadingIcon/LoadingIcon.svg";
 
 // TODO (Nico): Refactor into separate file to import
 const toDollars = (value) => {
@@ -44,7 +45,7 @@ const OrdersPage = () => {
   if (loading) {
     return (
       <div className={styles.wrapper}>
-        <h1>Loading</h1>
+        <img src={loadingIcon} width={200} />
       </div>
     );
   }

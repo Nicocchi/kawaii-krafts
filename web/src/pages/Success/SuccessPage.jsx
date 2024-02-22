@@ -3,6 +3,7 @@ import { AuthContext } from "../../context/AuthContext";
 import useFetchData from "../../hooks/useFetchData";
 import styles from "./success.module.css";
 import { useContext, useEffect, useState } from "react";
+import loadingIcon from "../../components/LoadingIcon/LoadingIcon.svg";
 
 // TODO (Nico): Refactor into separate file to import
 const toDollars = (value) => {
@@ -36,7 +37,7 @@ const SuccessPage = () => {
   if (loading) {
     return (
       <div className={styles.wrapper}>
-        <h1>Loading</h1>
+        <img src={loadingIcon} width={200} />
       </div>
     );
   }

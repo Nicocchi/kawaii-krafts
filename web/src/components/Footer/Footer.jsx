@@ -3,7 +3,7 @@ import styles from "./footer.module.css";
 
 const Footer = () => {
   return (
-    <div className={styles.wrapper}>
+    <footer className={styles.wrapper}>
       <div className={styles.links}>
         <NavLink className={styles.link} to="/terms">Terms</NavLink>
         <NavLink className={styles.link} to="/privacy-policy">Privacy Policy</NavLink>
@@ -12,7 +12,7 @@ const Footer = () => {
       <p className={styles.copyright}>
         © 2024, Kawaii Kraft
       </p>
-    </div>
+    </footer>
   );
 };
 
