@@ -1,6 +1,6 @@
 @font-face {
   font-family: mplus1;
-  src: url("./font/MPLUS1-VariableFont_wght.ttf");
+  src: url("$font/MPLUS1-VariableFont_wght.ttf");
 }
 
 * {
