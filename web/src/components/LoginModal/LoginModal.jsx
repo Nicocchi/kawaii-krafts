@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
 import useToggle from "../../hooks/useToggle";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
-import { BASE_URL } from "../../config.js";
+// import { BASE_URL } from "../../config.js";
 import toast, { Toaster } from "react-hot-toast";
 
 import { AuthContext } from "../../context/AuthContext";
 
 import axios from "../../utils/axios.config";
+const BASE_URL = import.meta.env.VITE_API_URL
 
 const LoginModal = ({ visible }) => {
   const [showModal, setShowModal] = useState(false);
