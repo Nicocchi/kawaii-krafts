@@ -10,7 +10,7 @@ const Footer = () => {
         <NavLink className={styles.link} to="/return-policy">Return Policy</NavLink>
       </div>
       <p className={styles.copyright}>
-        Copyright © Nicocchi / All Rights Reserved
+        © 2024, Kawaii Kraft
       </p>
     </div>
   );
