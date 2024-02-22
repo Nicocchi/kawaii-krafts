@@ -1,0 +1,27 @@
+.wrapper {
+    position: relative;
+    background-color: #F2E8EB;
+    border-radius: 12px;
+    height: 40px;
+}
+
+.icon {
+    height: 1.5rem;
+    width: 1.5rem;
+    /* background-color: red; */
+    display: flex;
+    padding: 4px;
+    position: absolute;
+    box-sizing: border-box;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+}
+
+.input {
+    background-color: #F2E8EB;
+    border-radius: 12px;
+    border: none;
+    height: 40px;
+    padding-left: 30px;
+}
