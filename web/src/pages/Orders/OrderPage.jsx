@@ -1,7 +1,7 @@
 import styles from "../ShoppingCart/cart.module.css";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../context/CartContext";
-import { BASE_URL } from "../../config";
+// import { BASE_URL } from "../../config";
 import useFetchData from "../../hooks/useFetchData";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -11,8 +11,9 @@ import {
   EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
 import { redirect, useNavigate } from "react-router-dom";
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
 import loadingIcon from "../../components/LoadingIcon/LoadingIcon.svg";
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 // TODO (Nico): Refactor into separate file to import
 const toDollars = (value) => {
