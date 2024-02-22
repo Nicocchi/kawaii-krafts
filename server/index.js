@@ -32,7 +32,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: true, // TODO: Remove from prod
+  origin: process.env.ORIGIN
 };
 app.use(cors(corsOptions));
 
