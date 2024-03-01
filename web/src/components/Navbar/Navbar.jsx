@@ -8,6 +8,7 @@ import Modal from "../core/Modal/Modal";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdAccountCircle } from "react-icons/md";
 import { Dropdown } from "../../context/DropdownContext";
+import MobileNavbar from "./MobileNavbar";
 
 
 const Navbar = () => {
@@ -34,6 +35,7 @@ const Navbar = () => {
       <div className={styles.logo}>
         <img src="./img/logo.png" onClick={() => navigate("/")} />
       </div>
+      <MobileNavbar />
       <div className={styles.nav}>
         <ul>
           <li>
