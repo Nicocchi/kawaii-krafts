@@ -21,20 +21,21 @@ const SuccessPage = () => {
     data: payments,
     loading,
     error,
-  } = useFetchData(`${BASE_URL}/orders/payment-history/${user.customerId}`);
+  } = useFetchData(`orders/payment-history/${user.customerId}`);
 
   const {
     data: productData,
     loading2,
     error2,
-  } = useFetchData(`${BASE_URL}/products`);
+  } = useFetchData(`products`);
 
   const findImageSrc = (id) => {
-    let pr = productData?.filter((p) => p.stripeId === id)[0];
+    if (!productData?.data?.filter) return "";
+    let pr = productData?.data?.filter((p) => p.stripeId === id)[0];
     return pr?.images[0];
   };
 
-  if (loading) {
+  if (loading || loading2) {
     return (
       <div className={styles.wrapper}>
         <img src={loadingIcon} width={200} />
@@ -42,7 +43,7 @@ const SuccessPage = () => {
     );
   }
 
-  if (error) {
+  if (error || error2) {
     console.error(error);
     return (
       <div className={styles.wrapper}>
@@ -51,7 +52,7 @@ const SuccessPage = () => {
     );
   }
 
-  const paidOn = new Date(payments[0]?.period_end);
+  const paidOn = new Date(payments?.data[0]?.period_end);
 
   return (
     <div className={styles.wrapper}>
@@ -80,19 +81,19 @@ const SuccessPage = () => {
             <td>
               <img
                 src={`/img/${findImageSrc(
-                  payments[0]?.lines?.data[0]?.price.product
+                  payments?.data[0]?.lines?.data[0]?.price.product
                 )}`}
                 className={styles.img}
               />
             </td>
             <td>
-              <p>{payments[0]?.lines?.data[0]?.description}</p>
+              <p>{payments?.data[0]?.lines?.data[0]?.description}</p>
             </td>
             <td>
-              <p>{payments[0]?.lines?.data[0]?.quantity}</p>
+              <p>{payments?.data[0]?.lines?.data[0]?.quantity}</p>
             </td>
             <td>
-              <p>{`${toDollars(payments[0]?.total)} USD`}</p>
+              <p>{`${toDollars(payments?.data[0]?.total)} USD`}</p>
             </td>
             <td>
               <p>{paidOn.toDateString()}</p>

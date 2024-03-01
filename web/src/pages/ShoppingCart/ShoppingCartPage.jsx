@@ -43,48 +43,32 @@ const Cart = () => {
     e.preventDefault();
     try {
       axios
-      .post("/orders/create-checkout-session", JSON.stringify({
-        cart: Object.values(cart),
-        customerId: user.customerId,
-      }), {
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        window.location.href = res.data.url;
-        setLoading(false);
-        setShowModal(false);
-        toast("Successfully logged in");
-        navigate("/");
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.error(err);
-      });
-
-      // const res = await fetch(`${BASE_URL}/orders/create-checkout-session`, {
-      //   method: "post",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      //   body: JSON.stringify({
-      //     cart: Object.values(cart),
-      //     customerId: user.customerId,
-      //   }),
-      // });
-
-      // const result = await res.json();
-
-      // window.location.href = result.url;
-
-
-      dispatch({
-        type: "REMOVE_ALL",
-      });
+        .post(
+          "/orders/create-checkout-session",
+          JSON.stringify({
+            cart: Object.values(cart),
+            customerId: user.customerId,
+          }),
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {
+          window.location.href = res.data.url;
+          setLoading(false);
+          dispatch({
+            type: "REMOVE_ALL",
+          });
+        })
+        .catch((err) => {
+          setLoading(false);
+          toast("Need to be logged in to checkout");
+        });
     } catch (err) {
-      console.error(err);
       toast("Need to be logged in to checkout");
-
     }
   };
 
@@ -114,62 +98,62 @@ const Cart = () => {
           <h1 className={styles.title}>Cart</h1>
         </div>
         <div className={styles.mTable}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Quantity</th>
-              <th>Price</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.keys(cart).map((itm) => {
-              return (
-                <tr key={cart[itm]._id}>
-                  <td>
-                    <img
-                      src={`${BASE_URL_CDN}/${cart[itm]?.images[0]}`}
-                      className={styles.img}
-                    />
-                  </td>
-                  <td>
-                    <p>{cart[itm].title}</p>
-                  </td>
-                  <td className={styles}>
-                    <p>{cart[itm].quantity}</p>
-                    {/* <input
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.keys(cart).map((itm) => {
+                return (
+                  <tr key={cart[itm]._id}>
+                    <td>
+                      <img
+                        src={`${BASE_URL_CDN}/${cart[itm]?.images[0]}`}
+                        className={styles.img}
+                      />
+                    </td>
+                    <td>
+                      <p>{cart[itm].title}</p>
+                    </td>
+                    <td className={styles}>
+                      <p>{cart[itm].quantity}</p>
+                      {/* <input
                       name="quantity"
                       className={styles.number}
                       onChange={(e) => onQuantityChange(e, cart[itm])}
                       value={cart[itm].quantity}
                       type="number"
                     /> */}
-                  </td>
-                  <td>
-                    <p>{toDollars(cart[itm].price * cart[itm].quantity)}</p>
-                  </td>
-                  <td>
-                    <button
-                      className={styles.button}
-                      onClick={() =>
-                        dispatch({
-                          type: "REMOVE",
-                          payload: {
-                            key: cart[itm]._id,
-                          },
-                        })
-                      }
-                    >
-                      Remove
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                    </td>
+                    <td>
+                      <p>{toDollars(cart[itm].price * cart[itm].quantity)}</p>
+                    </td>
+                    <td>
+                      <button
+                        className={styles.button}
+                        onClick={() =>
+                          dispatch({
+                            type: "REMOVE",
+                            payload: {
+                              key: cart[itm]._id,
+                            },
+                          })
+                        }
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
         <button className={styles.button} onClick={(e) => onCheckout(e)}>
           Continue to Checkout

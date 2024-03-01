@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
 import toast, { Toaster } from "react-hot-toast";
 const BASE_URL_CDN = import.meta.env.VITE_IMAGES_CDN;
+import loadingIcon from "../../components/LoadingIcon/LoadingIcon.svg";
 
 const ProductPage = () => {
   const params = useParams();
@@ -14,7 +15,7 @@ const ProductPage = () => {
     data: productData,
     loading,
     error,
-  } = useFetchData(`${BASE_URL}/products/${params.id}`);
+  } = useFetchData(`products/${params.id}`);
 
   const { dispatch } = useContext(CartContext);
   const notify = () => toast("Added to cart");
@@ -62,12 +63,29 @@ const ProductPage = () => {
     dispatch({
       type: "ADD",
       payload: {
-        product: productData[0],
+        product: productData?.data[0],
         quantity,
       },
     });
 
     notify();
+  }
+
+  if (loading) {
+    return (
+      <div className={styles.wrapper}>
+        <img src={loadingIcon} width={200} />
+      </div>
+    );
+  }
+
+  if (error) {
+    console.error(error);
+    return (
+      <div className={styles.wrapper}>
+        <h1>Error</h1>
+      </div>
+    );
   }
 
   return (
@@ -76,7 +94,7 @@ const ProductPage = () => {
         <div className={styles.left}>
           <div className={styles.imgWrapper}>
           <img
-            src={`${BASE_URL_CDN}/${productData[0]?.images[0]}`}
+            src={`${BASE_URL_CDN}/${productData?.data[0]?.images[0]}`}
             alt="Yazawa Nico Christmas Sticker"
             className={styles.img}
           />
@@ -84,12 +102,12 @@ const ProductPage = () => {
         </div>
         <div className={styles.right}>
           <div className={styles.rightT}>
-            <h1 className={styles.title}>{productData[0]?.title}</h1>
+            <h1 className={styles.title}>{productData?.data[0]?.title}</h1>
             <span className={styles.span}>
               <p className={styles.price}>
-                {toDollars(productData[0]?.price)} USD
+                {toDollars(productData?.data[0]?.price)} USD
               </p>
-              <p className={styles.stock}>{productData[0]?.stock ? "In Stock" : "Out of Stock"}</p>
+              <p className={styles.stock}>{productData?.data[0]?.stock ? "In Stock" : "Out of Stock"}</p>
             </span>
 
             <p className={styles.quantity}>Quantity</p>
@@ -107,18 +125,18 @@ const ProductPage = () => {
               <button className={styles.plus} onClick={increment}></button>
             </div>
             <div className={styles.summary}>
-            <p>{productData[0]?.summary}</p>
+            <p>{productData?.data[0]?.summary}</p>
             </div>
           </div>
           <div className={styles.rightB}>
-            <button className={styles.buy} disabled={!productData[0]?.stock} onClick={addToCart}>
-              {productData[0]?.stock ? "Add to Cart" : "Out of Stock"}
+            <button className={styles.buy} disabled={!productData?.data[0]?.stock} onClick={addToCart}>
+              {productData?.data[0]?.stock ? "Add to Cart" : "Out of Stock"}
             </button>
           </div>
         </div>
       </div>
       <div className={styles.bottom}>
-        <p>{productData[0]?.description}</p>
+        <p>{productData?.data[0]?.description}</p>
       </div>
       <Toaster />
     </div>

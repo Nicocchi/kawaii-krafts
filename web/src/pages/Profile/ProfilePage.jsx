@@ -23,7 +23,7 @@ const ProfilePage = () => {
     data: userData,
     loading,
     error,
-  } = useGetProfile(`${BASE_URL}/users/profile/me`);
+  } = useGetProfile(`users/profile/me`);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -37,22 +37,43 @@ const ProfilePage = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`${BASE_URL}/auth/resetp`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          password: resetFormData.password,
-          id: userData._id,
-        }),
-      });
+      axios
+        .post(
+          "/auth/resetp",
+          JSON.stringify({
+            password: resetFormData.password,
+            id: userData._id,
+          }),
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {
+          setChangePassword(false);
+          toast("Password Changed");
+        })
+        .catch((err) => {
+          toast("Error changing password");
+        });
+      // const res = await fetch(`${BASE_URL}/auth/resetp`, {
+      //   method: "post",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      //   body: JSON.stringify({
+      //     password: resetFormData.password,
+      //     id: userData._id,
+      //   }),
+      // });
   
-      const result = await res.json();
-      setChangePassword(false);
+      // const result = await res.json();
+      // setChangePassword(false);
   
-      toast("Password Changed");
+      // toast("Password Changed");
     } catch (error) {
       toast("Error changing password");
     }
@@ -63,10 +84,10 @@ const ProfilePage = () => {
   return (
     <div className={styles.wrapper}>
       <span>
-        Name: <p>{userData?.name}</p>
+        Name: <p>{userData?.data?.name}</p>
       </span>
       <span>
-        Email: <p>{userData?.email}</p>
+        Email: <p>{userData?.data?.email}</p>
       </span>
       <input
         type="password"

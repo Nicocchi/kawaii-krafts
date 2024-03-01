@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import axios from "../utils/axios.config";
 
 const useFetchData = (url) => {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const { token } = useContext(AuthContext);
@@ -12,17 +13,33 @@ const useFetchData = (url) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await fetch(url, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        axios
+          .get(url, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((res) => {
+            setData(res.data);
+            setLoading(false);
+          })
+          .catch((err) => {
+            setLoading(false);
+            console.error(err);
+          });
 
-        const result = await res.json();
+        // const res = await fetch(url, {
+        //   headers: { Authorization: `Bearer ${token}` },
+        // });
 
-        if (!res.ok) {
-          throw new Error(res.message);
-        }
-        setData(result.data);
-        setLoading(false);
+        // const result = await res.json();
+
+        // if (!res.ok) {
+        //   throw new Error(res.message);
+        // }
+        // setData(result.data);
+        // setLoading(false);
       } catch (err) {
         setLoading(false);
         setError(err.message);

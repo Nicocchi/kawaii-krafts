@@ -10,7 +10,7 @@ const Home = () => {
     data: productData,
     loading,
     error,
-  } = useFetchData(`${BASE_URL}/products`);
+  } = useFetchData(`products`);
 
   if (loading) {
     return (
@@ -38,9 +38,8 @@ const Home = () => {
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.title}>Featured Products</h1>
-      {/* <LoadingIcon /> */}
       <div className={styles.products}>
-        {productData
+        {productData.data
           .filter((product) => product.featured)
           .map((product) => (
             <ProductCard key={product?._id} value={product} />

@@ -9,7 +9,7 @@ const Catalog = () => {
     data: productData,
     loading,
     error,
-  } = useFetchData(`${BASE_URL}/products`);
+  } = useFetchData(`products`);
 
   if (loading) {
     return (
@@ -39,7 +39,7 @@ const Catalog = () => {
     <div className={styles.wrapper}>
         <h1 className={styles.title}>Catalog</h1>
       <div className={styles.products}>
-        {productData.map((product) => (
+        {productData?.data.map((product) => (
           <ProductCard
             key={product?._id}
             value={product}

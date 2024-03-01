@@ -30,16 +30,16 @@ const OrdersPage = () => {
     data: payments,
     loading,
     error,
-  } = useFetchData(`${BASE_URL}/orders/payment-history/${user?.customerId}`);
+  } = useFetchData(`orders/payment-history/${user?.customerId}`);
 
   const {
     data: productData,
     loading2,
     error2,
-  } = useFetchData(`${BASE_URL}/products`);
+  } = useFetchData(`products`);
 
   const findImageSrc = (id) => {
-    let pr = productData?.filter((p) => p.stripeId === id)[0];
+    let pr = productData?.data?.filter((p) => p.stripeId === id)[0];
     return pr?.images[0];
   };
 
@@ -78,14 +78,14 @@ const OrdersPage = () => {
           </thead>
           <tbody>
             {
-                payments.map((payment) => {
-                    const paidOn = new Date(payment?.period_end);
+                payments?.data.map((payment) => {
+                    const paidOn = new Date(payment?.data?.period_end);
                     return (
-                        <tr key={payment.id}>
-                            <td><img src={`/img/${findImageSrc(payment.lines?.data[0]?.price?.product)}`} className={styles.img} /></td>
-                            <td><p>{payment.lines?.data[0]?.description}</p></td>
-                            <td><p>{payment.lines?.data[0]?.quantity}</p></td>
-                            <td><p>{`${toDollars(payment.amount_paid)} USD`}</p></td>
+                        <tr key={payment?.data.id}>
+                            <td><img src={`/img/${findImageSrc(payment?.data.lines?.data[0]?.price?.product)}`} className={styles.img} /></td>
+                            <td><p>{payment?.data.lines?.data[0]?.description}</p></td>
+                            <td><p>{payment?.data.lines?.data[0]?.quantity}</p></td>
+                            <td><p>{`${toDollars(payment?.data.amount_paid)} USD`}</p></td>
                             <td><p>{paidOn.toDateString()}</p></td>
                         </tr>
                         

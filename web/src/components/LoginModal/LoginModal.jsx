@@ -64,24 +64,25 @@ const LoginModal = ({ visible }) => {
     setLoading(true);
 
     try {
-      const res = await fetch(`${BASE_URL}/auth/register`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const { message } = await res.json();
-
-      if (!res.ok) {
-        throw new Error(message);
-      }
-
-      setLoading(false);
-      toast("Successfully registered.");
+      axios
+        .post(
+          "/auth/register",
+          JSON.stringify(formData),
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          setLoading(false);
+          toast("Successfully registered.");
+        })
+        .catch((err) => {
+          setLoading(false);
+          toast("Error registering");
+        });
     } catch (err) {
-      console.error(err.message);
       setLoading(false);
     }
   };
