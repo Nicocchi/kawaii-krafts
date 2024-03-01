@@ -60,7 +60,7 @@ const MobileNavbar = () => {
           <button onClick={() => goToPage("/contact")}>Contact</button>
         </li>
         {token && user ? (
-          <Dropdown>
+          <Dropdown className={styles.mDropdown}>
             <Dropdown.Button>{user?.name}</Dropdown.Button>
             <Dropdown.Content>
               <Dropdown.List>
