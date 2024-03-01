@@ -87,6 +87,10 @@
   left: 0;
 }
 
+.mTable {
+  width: 100%;
+}
+
 .table {
   border-collapse: collapse;
   margin: 25px 0;
@@ -107,6 +111,7 @@
 .table th,
 .table td {
   padding: 12px 15px;
+  text-align: center;
 }
 
 .table tbody tr {
@@ -137,5 +142,10 @@
     width: 100%;
     max-width: 700px;
     min-width: 500px;
+  }
+  
+  .mTable {
+    overflow-x: auto;
+    
   }
 }

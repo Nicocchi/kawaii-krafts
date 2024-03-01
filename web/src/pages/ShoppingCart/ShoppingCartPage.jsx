@@ -91,6 +91,7 @@ const Cart = () => {
         <div className={styles.titleWrapper}>
           <h1 className={styles.title}>Cart</h1>
         </div>
+        <div className={styles.mTable}>
         <table className={styles.table}>
           <thead>
             <tr>
@@ -114,14 +115,15 @@ const Cart = () => {
                   <td>
                     <p>{cart[itm].title}</p>
                   </td>
-                  <td>
-                    <input
+                  <td className={styles}>
+                    <p>{cart[itm].quantity}</p>
+                    {/* <input
                       name="quantity"
                       className={styles.number}
                       onChange={(e) => onQuantityChange(e, cart[itm])}
                       value={cart[itm].quantity}
                       type="number"
-                    />
+                    /> */}
                   </td>
                   <td>
                     <p>{toDollars(cart[itm].price * cart[itm].quantity)}</p>
@@ -146,6 +148,7 @@ const Cart = () => {
             })}
           </tbody>
         </table>
+        </div>
         <button className={styles.button} onClick={onCheckout}>
           Continue to Checkout
         </button>
