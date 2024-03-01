@@ -13,6 +13,7 @@ import {
   EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
 import { redirect, useNavigate } from "react-router-dom";
+import axios from "../../utils/axios.config";
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
 
 // TODO (Nico): Refactor into separate file to import
@@ -38,29 +39,50 @@ const Cart = () => {
     });
   };
 
-  const onCheckout = async () => {
+  const onCheckout = async (e) => {
+    e.preventDefault();
     try {
-      const res = await fetch(`${BASE_URL}/orders/create-checkout-session`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          cart: Object.values(cart),
-          customerId: user.customerId,
-        }),
+      axios
+      .post("/orders/create-checkout-session", JSON.stringify({
+        cart: Object.values(cart),
+        customerId: user.customerId,
+      }), {
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        window.location.href = res.data.url;
+        setLoading(false);
+        setShowModal(false);
+        toast("Successfully logged in");
+        navigate("/");
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.error(err);
       });
 
-      const result = await res.json();
+      // const res = await fetch(`${BASE_URL}/orders/create-checkout-session`, {
+      //   method: "post",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      //   body: JSON.stringify({
+      //     cart: Object.values(cart),
+      //     customerId: user.customerId,
+      //   }),
+      // });
 
-      window.location.href = result.url;
+      // const result = await res.json();
+
+      // window.location.href = result.url;
+
 
       dispatch({
         type: "REMOVE_ALL",
       });
     } catch (err) {
-      // console.error(err);
+      console.error(err);
       toast("Need to be logged in to checkout");
 
     }
@@ -149,7 +171,7 @@ const Cart = () => {
           </tbody>
         </table>
         </div>
-        <button className={styles.button} onClick={onCheckout}>
+        <button className={styles.button} onClick={(e) => onCheckout(e)}>
           Continue to Checkout
         </button>
       </div>
