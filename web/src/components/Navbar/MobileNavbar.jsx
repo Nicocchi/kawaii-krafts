@@ -24,6 +24,7 @@ const MobileNavbar = () => {
   const { dispatch } = useContext(AuthContext);
 
   const handleLogout = () => {
+    navigate("/");
     dispatch({ type: "LOGOUT" });
   };
 

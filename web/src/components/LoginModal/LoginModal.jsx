@@ -231,15 +231,23 @@ const LoginModal = ({ visible }) => {
             />
           )}
 
-          <div>
+          <div className={styles.resetBottom}>
             <button className={styles.button} onClick={onResetSubmitHandler}>
               Reset
             </button>
+            <span className={styles.span}>
+            <p>Have an account?</p>
+            <p className={styles.link} onClick={() => setPasswordReset(false)}>
+              Login
+            </p>
+          </span>
           </div>
         </form>
       </div>
     );
   }
+
+  
 
   return (
     <div className={styles.wrapper}>

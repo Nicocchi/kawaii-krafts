@@ -265,3 +265,58 @@ export const reset = async (req, res) => {
       .json({ success: false, message: "Internal server error" });
   }
 };
+
+export const resetp = async (req, res) => {
+  const { id } = req.body;
+
+  if (!id) {
+    return res.status(400).json({ success: false, message: " bad request" });
+  }
+
+  try {
+    let user = null;
+    const customer = await User.findOne({ _id: id });
+    const admin = await Admin.findOne({ _id: id });
+
+    if (customer) {
+      user = customer;
+    }
+    if (admin) {
+      user = admin;
+    }
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (customer) {
+      user = customer;
+
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+      const upd = {
+        password: hashedPassword,
+      };
+
+      const updatedUser = await User.findByIdAndUpdate(
+        id,
+        { $set: upd },
+        { new: true }
+      ).select("-password");
+    }
+
+    if (admin) {
+      user = admin;
+    }
+
+    return res
+      .status(200)
+      .json({ success: true, message: "Password successfully reset" });
+  } catch (err) {
+    console.log(err);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error" });
+  }
+};
