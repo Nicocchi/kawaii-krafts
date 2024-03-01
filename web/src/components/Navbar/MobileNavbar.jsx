@@ -35,18 +35,28 @@ const MobileNavbar = () => {
   const goToPage = (value) => {
     setOpen(false);
     navigate(value);
-  }
+  };
 
   return (
-      <div className={styles.mWrapper}>
-        <div className={styles.hamburgerMenu}>
-          <TiThMenu
-            size={30}
-            className={styles.icon}
-            onClick={() => setOpen(!open)}
-          />
+    <div className={styles.mWrapper}>
+      <div className={styles.hamburgerMenu}>
+        <TiThMenu
+          size={30}
+          className={styles.icon}
+          onClick={() => setOpen(!open)}
+        />
       </div>
       <ul className={open ? styles.mNav : styles.mClose}>
+        <div className={styles.mTop}>
+        <img className={styles.logo} src="./img/logo.png" onClick={() => goToPage("/")} />
+          <div className={styles.hamburgerMenu}>
+            <TiThMenu
+              size={30}
+              className={styles.icon}
+              onClick={() => setOpen(!open)}
+            />
+          </div>
+        </div>
         <li>
           <button onClick={() => goToPage("/")}>Home</button>
         </li>

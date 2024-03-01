@@ -33,6 +33,7 @@
     max-width: 200px;
     min-width: 10px;
     padding-left: 10px;
+    
 
   }
 
@@ -49,7 +50,7 @@
 
   .mNav {
     position: fixed;
-    top: 70px;
+    top: 0px;
     left: 0;
     display: flex;
     flex-direction: column;
@@ -61,8 +62,17 @@
     z-index: 100;
   }
 
+  .mTop {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+  }
+
   .hamburgerMenu {
     display: flex;
+    position: fixed;
+    top: 20px;
+    right: 20px;
   }
 
   .mClose {
