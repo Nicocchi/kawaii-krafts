@@ -43,7 +43,7 @@ const OrdersPage = () => {
     return pr?.images[0];
   };
 
-  if (loading) {
+  if (loading || loading2) {
     return (
       <div className={styles.wrapper}>
         <img src={loadingIcon} width={200} />
@@ -51,7 +51,7 @@ const OrdersPage = () => {
     );
   }
 
-  if (error) {
+  if (error || error2) {
     console.error(error);
     return (
       <div className={styles.wrapper}>
@@ -81,11 +81,11 @@ const OrdersPage = () => {
                 payments?.data.map((payment) => {
                     const paidOn = new Date(payment?.data?.period_end);
                     return (
-                        <tr key={payment?.data.id}>
-                            <td><img src={`/img/${findImageSrc(payment?.data.lines?.data[0]?.price?.product)}`} className={styles.img} /></td>
-                            <td><p>{payment?.data.lines?.data[0]?.description}</p></td>
-                            <td><p>{payment?.data.lines?.data[0]?.quantity}</p></td>
-                            <td><p>{`${toDollars(payment?.data.amount_paid)} USD`}</p></td>
+                        <tr key={payment?.id}>
+                            <td><img src={`/img/${findImageSrc(payment?.lines?.data[0]?.price?.product)}`} className={styles.img} /></td>
+                            <td><p>{payment?.lines?.data[0]?.description}</p></td>
+                            <td><p>{payment?.lines?.data[0]?.quantity}</p></td>
+                            <td><p>{`${toDollars(payment?.amount_paid)} USD`}</p></td>
                             <td><p>{paidOn.toDateString()}</p></td>
                         </tr>
                         
