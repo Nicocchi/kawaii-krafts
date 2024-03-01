@@ -79,7 +79,7 @@ const OrdersPage = () => {
           <tbody>
             {
                 payments?.data.map((payment) => {
-                    const paidOn = new Date(payment?.data?.period_end);
+                    const paidOn = new Date(payment?.period_end);
                     return (
                         <tr key={payment?.id}>
                             <td><img src={`/img/${findImageSrc(payment?.lines?.data[0]?.price?.product)}`} className={styles.img} /></td>
