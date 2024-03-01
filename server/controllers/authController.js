@@ -255,6 +255,29 @@ export const reset = async (req, res) => {
       user = admin;
     }
 
+    // email user
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      host: "smtp.gmail.net",
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+
+    const info = await transporter.sendMail({
+      from: {
+        name: "Kawaii Krafts",
+        address: process.env.EMAIL_USER,
+      },
+      to: [email],
+      subject: "Kawaii Krafts Password reset",
+      text: "Kawaii Krafts Password reset",
+      html: `<b>${name}, you have successfully updated your password. If this was not you, please contact us immediately.</b>`,
+    });
+
     return res
       .status(200)
       .json({ success: true, message: "Password successfully reset" });
@@ -309,6 +332,29 @@ export const resetp = async (req, res) => {
     if (admin) {
       user = admin;
     }
+
+    // email user
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      host: "smtp.gmail.net",
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+
+    const info = await transporter.sendMail({
+      from: {
+        name: "Kawaii Krafts",
+        address: process.env.EMAIL_USER,
+      },
+      to: [email],
+      subject: "Kawaii Krafts Password reset",
+      text: "Kawaii Krafts Password reset",
+      html: `<b>${name}, you have successfully updated your password. If this was not you, please contact us immediately.</b>`,
+    });
 
     return res
       .status(200)

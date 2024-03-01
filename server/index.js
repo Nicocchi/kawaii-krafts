@@ -54,6 +54,7 @@ app.post('/webhook', express.raw({ type: 'application/json'}), (req, res) => {
     case 'payment_intent.succeeded':
       const paymentIntentSucceeded = event.data.object;
       // Then define and call a function to handle the event payment_intent.succeeded
+      // email user
       break;
     case 'checkout.session.completed':
       const checkoutSessionCompleted = event.data.object;
