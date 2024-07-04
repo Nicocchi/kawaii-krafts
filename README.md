@@ -1,4 +1,4 @@
-# Kawaii Kraft
+# Kawaii Krafts
 
 Demo of an e-commerce site similar to shopify & booth
 
