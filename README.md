@@ -47,3 +47,11 @@ Install the required packages using `npm i` or `yarn install`
 Build the package using `npm run build` or `yarn build`
 
 Now you can serve the dist/ folder.
+
+## Testing Purchases
+
+You can use `4242 4242 4242 4242` as the card number and a valid future date, any CVC, anything else for the other fields. This will result in a valid/successful purchase.
+
+Using `4000 0000 0000 0002` will make the card declined.
+
+For more information on testing, visit the [Stripe Documentation](https://docs.stripe.com/testing)
